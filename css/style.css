@@ -4,19 +4,18 @@ body {
   font-family: 'Roboto', sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #00204A; /* Ubah warna latar belakang */
-  color: white; /* Ubah warna teks */
+  background-color: #FFFFFF; /* Warna latar belakang putih */
+  color: #000000; /* Warna teks hitam */
 }
 
 header {
-  background-color: #FF7A00; /* Ubah warna header */
+  background-color: #FF7A00; /* Warna latar belakang header oranye */
   padding: 20px 0;
 }
 
 nav {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: center;
 }
 
 nav ul {
@@ -31,13 +30,13 @@ nav ul li {
 }
 
 nav ul li a {
-  color: white; /* Ubah warna teks menu */
+  color: #FFFFFF; /* Warna teks menu putih */
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 nav ul li a:hover {
-  color: #00204A; /* Ubah warna teks menu saat dihover */
+  color: #00204A; /* Warna teks menu saat dihover biru tua */
 }
 
 .container {
@@ -46,14 +45,45 @@ nav ul li a:hover {
 }
 
 .box {
-  background-color: rgba(255, 255, 255, 0.1); /* Ubah warna box dengan transparansi */
+  background-color: rgba(255, 255, 255, 0.9); /* Warna latar belakang box putih dengan sedikit transparansi */
   padding: 20px;
   margin-bottom: 20px;
   border-radius: 10px;
+  position: relative;
+}
+
+.box::before,
+.box::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  background-color: #FF7A00; /* Warna ornamen */
+  border-radius: 50%;
+  animation: ornamen 2s linear infinite alternate;
+}
+
+.box::before {
+  left: -10px;
+  animation-delay: 0.5s;
+}
+
+.box::after {
+  right: -10px;
+}
+
+@keyframes ornamen {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.5);
+  }
 }
 
 footer {
-  background-color: #FF7A00; /* Ubah warna footer */
+  background-color: #FF7A00; /* Warna latar belakang footer oranye */
   padding: 20px 0;
   text-align: center;
 }
