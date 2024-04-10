@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+//   $("button").click(function(){
+    $.get("data_republika.json", function(data, status){
+    //   alert("Data: " + data + "\nStatus: " + status);
+      console.log(data)
+
+        var konten = data.data;
+        var arrayKonten = []
+        var row = ""
+        konten.forEach(element => {
+            // arrayKonten.push(element)
+            row += "<tr>"+
+                "<td>"+element.kategori+"</td>"+
+                "<td>"+element.judul+"</td>"+
+                "</tr>"
+        });
+
+      $("#my-table").html(row);
+    });
+//   });
+});
+</script>
+
+<style>
+    #my-table tr td{
+        border:1px solid #000;
+    }
+</style>
+
+</head>
+<body>
+
+<button>Send an HTTP GET request to a page and get the result back</button>
+
+<div id="konten"></div>
+
+</body>
+
+<table id="my-table">
+    
+</table>
+
+</html>
