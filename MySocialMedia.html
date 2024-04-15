@@ -4,13 +4,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Social Media</title>
+    <title>My Web Scrapping</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Srisakdi&display=swap" rel="stylesheet">
+    <style>
+        #my-table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        #my-table th,
+        #my-table td {
+            border: 1px solid #000;
+            padding: 8px;
+        }
+
+        #my-table th {
+            background-color: #8B4513;
+            color: white;
+            text-align: left;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #f1f1f1;
+            text-align: center;
+            padding: 10px 0;
+            display: none;
+        }
+
+        .show-footer {
+            display: block;
+        }
+    </style>
 </head>
 
 <body>
     <header>
+        <div class="sun">
+        </div>
         <nav>
             <div class="logo">
                 <h4>Ichsan Proyek 1</h4>
@@ -20,7 +56,7 @@
                 <li><a href="profile.html">Profile</a></li>
                 <li><a href="myPersonalStuff.html">My Personal Stuff</a></li>
                 <li><a href="gallery.html">Gallery</a></li>
-                <li><a href="MySocialMedia.html">My Social Media</a></li>
+                <li><a href="MySocialMedia.html">My Web Scrapping</a></li>
             </ul>
             <div class="menu-toggle">
                 <input type="checkbox">
@@ -32,16 +68,56 @@
     </header>
     <div class="container">
         <main>
-            <div class="box flexone">
-                <a href="https://www.instagram.com/m.ichsan.rahmat.r" target="_blank">
-                    <img width="20px" src="img/Instagram.png" alt="Instagram Logo">
-                </a>
-            </div>
+            <!-- Remove Instagram link and image -->
         </main>
-        <footer class="box">
-            Ichsan, Di depan Laptop 27 Februari 2024
-        </footer>
+        <table id="my-table">
+            <thead>
+                <tr>
+                    <th>Kategori</th>
+                    <th>Judul</th>
+                    <th>Waktu Publish</th>
+                    <th>Waktu Scraping</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Data rows will be inserted here -->
+            </tbody>
+        </table>
     </div>
+    <footer class="box">
+        Ichsan, Di depan Laptop 27 Februari 2024
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.get("data_republika.json", function (data, status) {
+                // Urutkan data berdasarkan waktu_scraping secara descending
+                data.sort((a, b) => new Date(b.waktu_scraping) - new Date(a.waktu_scraping));
+
+                var konten = data;
+                var row = "";
+                konten.forEach(element => {
+                    row += "<tr>" +
+                        "<td>" + element.kategori + "</td>" +
+                        "<td>" + element.judul + "</td>" +
+                        "<td>" + element.waktu_publish + "</td>" +
+                        "<td>" + element.waktu_scraping + "</td>" +
+                        "</tr>";
+                });
+
+                $("#my-table tbody").html(row);
+
+                // Tampilkan footer hanya ketika scroll ke layar paling bawah
+                $(window).scroll(function () {
+                    if ($(window).scrollTop() + $(window).height() == $(document).height()) {
+                        $("footer").addClass("show-footer");
+                    } else {
+                        $("footer").removeClass("show-footer");
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>
